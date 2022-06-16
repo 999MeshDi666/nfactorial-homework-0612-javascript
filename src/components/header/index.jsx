@@ -1,10 +1,13 @@
 //импортируем .svg картинки как компоненты Реакт
 import { ReactComponent as StarWarsLogoSVG } from "../../assets/star-wars.svg";
-import { ReactComponent as IconSearchSVG } from "../../assets/icon-search.svg";
 import { ReactComponent as FacebookLogoSVG } from "../../assets/facebook.svg";
 import { ReactComponent as InstagramLogoSVG } from "../../assets/instagram.svg";
 import { ReactComponent as TwitterLogoSVG } from "../../assets/twitter.svg";
 import { ReactComponent as YoutubeLogoSVG } from "../../assets/youtube.svg";
+// import { useEffect } from "react";
+import { SearchBar } from "../sw-search";
+// import { ThemeContext } from "../../Context";
+
 
 //массив данных ссылок
 const swLinks = [
@@ -30,9 +33,12 @@ const swLinks = [
   },
 ];
 
-export const Header = ({ fan }) => {
+
+export const Header = ({ fan, handleSetDarkTheme, handleSetLightTheme, theme}) => {
+  // const { backGroundTheme } = useContext(ThemeContext);
+ 
   return (
-    <header>
+    <header className = {theme}>
       <div className="links-layout">
         {swLinks.map((link) => (
           <a
@@ -46,15 +52,23 @@ export const Header = ({ fan }) => {
             {link.component}
           </a>
         ))}
+
+        <div className="theme-mode">
+          <button className="theme-btn" onClick={handleSetLightTheme}>Red</button>
+          <button className="theme-btn" onClick={handleSetDarkTheme}>Dark</button>
+
+
+        </div>
       </div>
       <StarWarsLogoSVG />
       <div className="search-layout">
-        <IconSearchSVG className="search-icon" />
-        <input placeholder="Search Star Wars" type="text" />
+        
+       <SearchBar> Search Star Wars </SearchBar>
         <div style={{ color: "white", paddingTop: "1rem" }}>
           I am fan of: {fan}
-        </div>
       </div>
+      </div>
+      
     </header>
   );
 };
