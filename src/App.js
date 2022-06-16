@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { DefaultContext } from "./Context";
+import { ThemeContext } from "./Context";
 import { useEffect } from "react";
 
 //импортируем стили
@@ -17,12 +18,9 @@ export default function App() {
     setFan(name);
   };
   
-  const handleSetDarkTheme = ()=>{
-    setTheme("theme-dark");
-    localStorage.setItem('theme', JSON.stringify(theme))
-  }
-  const handleSetLightTheme = ()=>{
-    setTheme("theme-red");
+ 
+  const handleSetTheme = ()=>{
+    theme === "theme-dark"? setTheme("theme-red") : setTheme("theme-dark");
     localStorage.setItem('theme', JSON.stringify(theme))
 
   } 
@@ -34,14 +32,15 @@ export default function App() {
   
 
   return (
-    <DefaultContext.Provider value={{ handleCreateFan }}>
-      <Header fan={fan} theme = {theme}
-        handleSetDarkTheme = {handleSetDarkTheme}
-        handleSetLightTheme = {handleSetLightTheme}  
-        />
-      <hr />
-      <Content />
-      <Footer/>
-    </DefaultContext.Provider>
+    <ThemeContext.Provider value = {{handleSetTheme}}>
+      <DefaultContext.Provider value={{ handleCreateFan }}>
+        <Header fan={fan} theme = {theme}/>
+        <hr />
+        <Content theme={theme}/>
+        <Footer/>
+      </DefaultContext.Provider>
+      
+    </ThemeContext.Provider>
+    
   );
 }

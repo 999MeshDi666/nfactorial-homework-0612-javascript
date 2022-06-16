@@ -4,9 +4,10 @@ import { ReactComponent as FacebookLogoSVG } from "../../assets/facebook.svg";
 import { ReactComponent as InstagramLogoSVG } from "../../assets/instagram.svg";
 import { ReactComponent as TwitterLogoSVG } from "../../assets/twitter.svg";
 import { ReactComponent as YoutubeLogoSVG } from "../../assets/youtube.svg";
-// import { useEffect } from "react";
+
 import { SearchBar } from "../sw-search";
-// import { ThemeContext } from "../../Context";
+import { useContext } from "react";
+import { ThemeContext } from "../../Context";
 
 
 //массив данных ссылок
@@ -34,8 +35,8 @@ const swLinks = [
 ];
 
 
-export const Header = ({ fan, handleSetDarkTheme, handleSetLightTheme, theme}) => {
-  // const { backGroundTheme } = useContext(ThemeContext);
+export const Header = ({ fan, theme}) => {
+  const { handleSetTheme } = useContext(ThemeContext);
  
   return (
     <header className = {theme}>
@@ -54,10 +55,7 @@ export const Header = ({ fan, handleSetDarkTheme, handleSetLightTheme, theme}) =
         ))}
 
         <div className="theme-mode">
-          <button className="theme-btn" onClick={handleSetLightTheme}>Red</button>
-          <button className="theme-btn" onClick={handleSetDarkTheme}>Dark</button>
-
-
+          <button className="theme-btn" onClick={handleSetTheme}>{theme === "theme-dark" ? "red" : "dark"}</button>
         </div>
       </div>
       <StarWarsLogoSVG />
