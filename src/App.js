@@ -12,7 +12,7 @@ import { Footer } from "./components/footer";
 
 export default function App() {
   const [fan, setFan] = useState("");
-  const [theme, setTheme] = useState(JSON.parse(localStorage.getItem('theme')));
+  const [theme, setTheme] = useState(JSON.parse(localStorage.getItem('theme')) || "theme-dark");
 
   const handleCreateFan = ({ name }) => {
     setFan(name);
@@ -21,14 +21,14 @@ export default function App() {
  
   const handleSetTheme = ()=>{
     theme === "theme-dark"? setTheme("theme-red") : setTheme("theme-dark");
-    localStorage.setItem('theme', JSON.stringify(theme))
-
+    // console.log(theme)
+    // localStorage.setItem('theme', JSON.stringify(theme))
   } 
   console.log(theme)
 
   useEffect(()=>{
     localStorage.setItem('theme', JSON.stringify(theme))
-  })
+  }, [theme])
   
 
   return (

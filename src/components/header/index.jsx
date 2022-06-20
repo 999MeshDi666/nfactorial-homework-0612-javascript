@@ -55,7 +55,7 @@ export const Header = ({ fan, theme}) => {
         ))}
 
         <div className="theme-mode">
-          <button className="theme-btn" onClick={handleSetTheme}>{theme === "theme-dark" ? "red" : "dark"}</button>
+          <button className="theme-btn" onClick={handleSetTheme}>Change  theme</button>
         </div>
       </div>
       <StarWarsLogoSVG />
